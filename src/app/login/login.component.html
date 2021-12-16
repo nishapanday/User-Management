@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="text-center">
+          <h1>User Login</h1>
+          <hr />
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+          <div class="mb-3">
+            <label>Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              ngModel
+              name="email"
+              required
+              email
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="Password"
+              ngModel
+              name="password"
+              required
+            />
+          </div>
+          <div *ngIf="firebaseErrorMessage != ''" class="error-style">
+            <span>{{ firebaseErrorMessage }}</span>
+          </div>
+
+          <button class="btn btn-primary">Login</button>
+        </form>
+        <a routerLink="/signup">New User ? Click to Signup !</a>
+      </div>
+    </div>
+  </div>
+</div>
