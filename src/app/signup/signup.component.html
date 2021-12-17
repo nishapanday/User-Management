@@ -6,23 +6,23 @@
           <h1>User Registration</h1>
           <hr />
         </div>
-        <form>
+        <form [formGroup]="signupForm" (ngSubmit)="signup()">
           <div class="mb-3">
             <label class="form-label">Name</label>
             <input
-              type="email"
+              type="name"
               class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
+              formControlName="name"
+              required
             />
           </div>
           <div class="mb-3">
             <label class="form-label">Mobile Number</label>
             <input
-              type="email"
+              type="number"
               class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
+              formControlName="number"
+              required
             />
           </div>
           <div class="mb-3">
@@ -30,12 +30,9 @@
             <input
               type="email"
               class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
+              formControlName="email"
+              required
             />
-            <div id="emailHelp" class="form-text">
-              We'll never share your email with anyone else.
-            </div>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label"
@@ -44,9 +41,14 @@
             <input
               type="password"
               class="form-control"
-              id="exampleInputPassword1"
+              formControlName="password"
+              required
             />
           </div>
+          <div *ngIf="firebaseErrorMessage != ''" class="error-style">
+            <span>{{ firebaseErrorMessage }}</span>
+          </div>
+
           <button type="submit" class="btn btn-primary">Signup</button>
         </form>
         <a routerLink="/login">Already Register ? Click to Login !</a>
