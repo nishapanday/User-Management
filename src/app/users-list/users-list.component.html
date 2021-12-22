@@ -1,0 +1,89 @@
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">S.N</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone number</th>
+        <th scope="col">Email address</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users | async; let i = index">
+        <th>{{ i + 1 }}</th>
+        <td>{{ user.name }}</td>
+        <td>{{ user.number }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="openEdit(modalData, user)"
+          >
+            Edit
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="openSweetalert()"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #modalData let-modal>
+    <form [formGroup]="editForm">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+          Angular Bootstrap Modal Popup
+        </h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="firstname">Name</label>
+          <div class="input-group">
+            <input formControlName="name" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="firstname">Mobile Number</label>
+          <div class="input-group">
+            <input formControlName="number" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="modal.close('Save click')"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-info"
+          (click)="modal.close('Save click')"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </ng-template>
+</div>
