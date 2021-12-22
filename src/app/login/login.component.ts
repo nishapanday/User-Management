@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authservice: AuthServiceService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private toastr: ToastrService
   ) {
     this.isProgressVisible = false;
 
@@ -54,5 +56,9 @@ export class LoginComponent implements OnInit {
           this.firebaseErrorMessage = result.message;
         }
       });
+  }
+
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
   }
 }

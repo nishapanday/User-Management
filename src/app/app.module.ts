@@ -16,6 +16,9 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
     SignupComponent,
     AddUserComponent,
+    UserProfileComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +42,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AngularFirestoreModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [AuthServiceService],
   bootstrap: [AppComponent],

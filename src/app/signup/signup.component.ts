@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-signup',
@@ -13,11 +14,13 @@ export class SignupComponent implements OnInit {
   isProgressVisible: boolean;
   signupForm: FormGroup;
   firebaseErrorMessage: string;
+  closeModal: string;
 
   constructor(
     private router: Router,
     private authservice: AuthServiceService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private modalService: NgbModal
   ) {
     this.isProgressVisible = false;
     this.firebaseErrorMessage = '';
@@ -57,5 +60,28 @@ export class SignupComponent implements OnInit {
       .catch(() => {
         this.isProgressVisible = false;
       });
+  }
+
+  triggerModal(content) {
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (res) => {
+          this.closeModal = `Closed with: ${res}`;
+        },
+        (res) => {
+          this.closeModal = `Dismissed ${this.getDismissReason(res)}`;
+        }
+      );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }

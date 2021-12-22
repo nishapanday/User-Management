@@ -17,7 +17,8 @@ export class AuthServiceService {
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private firestore: AngularFirestore
   ) {
     this.userLoggedIn = false;
 
@@ -58,11 +59,13 @@ export class AuthServiceService {
             accountType: 'user',
             //displayName: user.displayName,
             //displayName_lower: user.displayName.toLowerCase(),
+            name: user.name,
             email: user.email,
+            number: user.number,
             email_lower: emailLower,
           });
 
-        result.user.sendEmailVerification(); // immediately send the user a verification email
+        // result.user.sendEmailVerification(); // immediately send the user a verification email
       })
       .catch((error) => {
         console.log('Auth Service: signup error', error);
@@ -104,7 +107,7 @@ export class AuthServiceService {
     return this.afAuth
       .signOut()
       .then(() => {
-        this.router.navigate(['/home']); // when we log the user out, navigate them to home
+        this.router.navigate(['/login']); // when we log the user out, navigate them to home
       })
       .catch((error) => {
         console.log('Auth Service: logout error...');
@@ -128,4 +131,6 @@ export class AuthServiceService {
   getCurrentUser() {
     return this.afAuth.currentUser; // returns user object for logged-in users, otherwise returns null
   }
+
+  updateUser(data) {}
 }
