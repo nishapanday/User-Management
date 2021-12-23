@@ -86,7 +86,7 @@ export class UsersListComponent implements OnInit {
     }
   }
 
-  openSweetalert() {
+  openSweetalert(email) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -96,8 +96,19 @@ export class UsersListComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
+      console.log(' kjbk');
       if (result.isConfirmed) {
-        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+        this.firestore
+          .collection('users')
+          .doc(email)
+          .delete()
+          .then(() => {
+            Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+          })
+          .catch((error) => {
+            Swal.fire('Deleted!', 'Your file has not been deleted.');
+          });
+        //   Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       }
     });
   }
