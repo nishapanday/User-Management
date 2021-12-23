@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this.authservice.userLoggedIn) {
       // if the user's logged in, navigate them to the home (NOTE: don't use afAuth.currentUser -- it's never null)
+      console.log('login com: usser logged in');
       this.router.navigate(['/home']);
     }
   }

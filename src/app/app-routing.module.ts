@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { TopNavigationBarComponent } from './top-navigation-bar/top-navigation-bar.component';
 import { UsersListComponent } from './users-list/users-list.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -24,18 +25,17 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'user-list',
     component: UsersListComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'add-user',
     component: AddUserComponent,
-  },
-  {
-    path: 'top-navigation-bar',
-    component: TopNavigationBarComponent,
+    canActivate: [AuthGuard],
   },
 ];
 
